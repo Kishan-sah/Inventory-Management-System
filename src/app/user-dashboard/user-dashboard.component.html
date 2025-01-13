@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <h1 class="text-center text-info text-bold">List of Available Products</h1>
+<br>
+  <table class="table table-striped table-bordered">
+    <thead class="table-success text-center">
+      <tr>
+        <th>Product Name</th>
+        <th>MRP</th>
+        <th>Product left</th>
+        <th>Discount</th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+      <tr *ngFor="let item of inventoryData">
+     
+        <td>{{ item.name }}</td>
+        <td>{{ item.mrp }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.discount }}%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-primary mb-3" (click)="purchase()">Buy Products</button>
+</div>

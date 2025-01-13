@@ -1,0 +1,59 @@
+<div class="container d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="card shadow-lg border-0" style="width: 100%; max-width: 600px; border-radius: 15px; background: linear-gradient(135deg, #ffffff, #e9f7fc);">
+    <!-- Header -->
+    <div class="card-header bg-info text-white text-center py-3" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+      <h2 class="mb-0">Dispatch Product</h2>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="dispatchForm" (ngSubmit)="onSubmit()">
+       
+        <!-- Product Name -->
+        <div class="form-group mb-3">
+          <label for="productName" class="form-label small fw-bold">Product Name</label>
+          <select
+            id="productName"
+            formControlName="productName"
+            class="form-select border-primary shadow-sm"
+            (change)="onProductSelect($event)"
+          >
+            <option value="" disabled selected>Select Product</option>
+            <option *ngFor="let product of orderedProductData" [value]="product.name">
+              {{ product.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Order ID -->
+        <div class="form-group mb-3">
+          <label for="orderId" class="form-label small fw-bold">Order ID</label>
+          <input
+            type="text"
+            id="orderId"
+            formControlName="orderId"
+            class="form-control form-control-sm border-primary shadow-sm"
+            readonly
+          />
+        </div>
+
+        <!-- Payable Amount -->
+        <div class="form-group mb-3">
+          <label for="payableAmount" class="form-label small fw-bold">Payable Amount</label>
+          <input
+            type="number"
+            id="payableAmount"
+            formControlName="payableAmount"
+            class="form-control form-control-sm border-primary shadow-sm"
+            readonly
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-success" [disabled]="dispatchForm.invalid"> Sell Product</button>
+        <button type="button" class="btn btn-danger" (click)="close()">
+          close
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

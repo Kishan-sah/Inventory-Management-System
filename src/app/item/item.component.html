@@ -1,0 +1,119 @@
+<div class="container d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="card shadow-lg border-0" style="width: 100%; max-width: 600px; border-radius: 15px;">
+    <!-- Form Header -->
+    <div class="card-header bg-success text-white text-center py-3">
+      <h3 class="mb-0">{{ editItem ? "Update Item Details" : "Add New Item" }}</h3>
+    </div>
+
+    <!-- Form Body -->
+    <div class="card-body">
+      <form [formGroup]="addItemForm">
+      
+
+        <!-- Category and Name Row -->
+        <div class="row">
+          <div class="col-6 mb-3">
+            <label for="productId" class="form-label fw-semibold">Product Id</label>
+            <input type="text" id="productId" class="form-control" formControlName="productId" [disabled]="true" />
+          </div>
+
+
+          <div class="col-6 mb-3">
+            <label for="date" class="form-label fw-semibold">Date</label>
+            <input type="text" id="date" class="form-control" formControlName="date" [disabled]="true" />
+          </div>
+        </div>
+
+  <!-- Category and Name Row -->
+  <div class="row">
+
+    <div class="col-6 mb-3">
+      <label for="category" class="form-label fw-semibold">Category</label>
+      <select id="category" class="form-select" formControlName="category">
+        <option value="">Select a Category</option>
+        <option *ngFor="let brand of brands" [value]="brand.name">
+          {{ brand.name }}
+        </option>
+      </select>
+      <div *ngIf="addItemForm.get('category')?.invalid && addItemForm.get('category')?.touched"
+        class="text-danger small">
+        Select a category.
+      </div>
+    </div>
+
+    <div class="col-6 mb-3">
+      <label for="subCategory" class="form-label fw-semibold">Sub-Category</label>
+      <select id="subCategory" class="form-select" formControlName="subCategory">
+        <option value="">Select a Sub-Category</option>
+        <option *ngFor="let product of ProductName" [value]="product.name">
+          {{ product.name }}
+        </option>
+      </select>
+      <div *ngIf="addItemForm.get('subCategory')?.invalid && addItemForm.get('subCategory')?.touched"
+        class="text-danger small">
+        Select a sub-category.
+      </div>
+    </div>
+  </div>
+
+        <!-- MRP, Discount, and Quantity Row -->
+        <div class="row">
+          <div class="col-4 mb-3">
+            <label for="mrp" class="form-label fw-semibold">MRP</label>
+            <input type="number" id="mrp" class="form-control" formControlName="mrp" />
+            <div *ngIf="addItemForm.get('mrp')?.invalid && addItemForm.get('mrp')?.touched" class="text-danger small">
+              Set the product MRP.
+            </div>
+          </div>
+
+          <div class="col-4 mb-3">
+            <label for="discount" class="form-label fw-semibold">Discount (%)</label>
+            <input type="number" id="discount" class="form-control" formControlName="discount" />
+            <div *ngIf="addItemForm.get('discount')?.invalid && addItemForm.get('discount')?.touched"
+              class="text-danger small">
+              Set the discount.
+            </div>
+          </div>
+
+          <div class="col-4 mb-3">
+            <label for="threshold" class="form-label fw-semibold">Min Quantity</label>
+            <input type="number" id="threshold" class="form-control" formControlName="threshold" />
+            <div *ngIf="addItemForm.get('threshold')?.invalid && addItemForm.get('threshold')?.touched"
+              class="text-danger small">
+              Set the minimum quantity.
+            </div>
+          </div>
+        </div>
+
+        <!-- Minimum Quantity and Date Row -->
+        <div class="row">
+
+          <div class="col-6 mb-3">
+            <label for="name" class="form-label fw-semibold">Product Name</label>
+            <input type="text" id="quantity" class="form-control" formControlName="name" />
+            <div *ngIf="addItemForm.get('name')?.invalid && addItemForm.get('name')?.touched"
+              class="text-danger small">
+              Enter product Name.
+            </div>
+          </div>
+          <div class="col-6 mb-3">
+            <label for="quantity" class="form-label fw-semibold">Quantity</label>
+            <input type="number" id="quantity" class="form-control" formControlName="quantity" />
+            <div *ngIf="addItemForm.get('quantity')?.invalid && addItemForm.get('quantity')?.touched"
+              class="text-danger small">
+              Specify the quantity.
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-success w-48" [disabled]="addItemForm.invalid" (click)="onSave()">
+          {{ editItem ? "Update Item" : "Save Item" }}
+        </button>
+        <button type="button" class="btn btn-danger w-48" (click)="close()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

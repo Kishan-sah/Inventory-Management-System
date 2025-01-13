@@ -1,0 +1,78 @@
+<div class="container d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="card shadow-lg border-0" style="width: 100%; max-width: 600px; border-radius: 15px; background: linear-gradient(135deg, #ffffff, #e9f7fc);">
+    <!-- Header -->
+    <div class="card-header bg-info text-white text-center py-3" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+      <h2 class="mb-0">Order Form</h2>
+    </div>
+
+    <!-- Form Body -->
+    <div class="card-body">
+      <form [formGroup]="orderForm" class="p-3">
+        <!-- Row 1: Customer Name -->
+        <div class="row g-3">
+          <div class="col-md-12">
+            <label for="CustomerName" class="form-label fw-bold small">Customer Name</label>
+            <input type="text" id="CustomerName" class="form-control form-control-sm border-primary shadow-sm" formControlName="CustomerName" placeholder="Enter your name" />
+            <div *ngIf="orderForm.get('CustomerName')?.invalid && orderForm.get('CustomerName')?.touched" class="text-danger small mt-1">
+              Mention your name.
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: Product Name and Quantity -->
+        <div class="row g-3 mt-2">
+          <!-- Product Name -->
+          <div class="col-md-8">
+            <label for="name" class="form-label fw-bold small">Product Name</label>
+            <select id="name" class="form-select border-primary shadow-sm" formControlName="name" (change)="chosenProduct($event)">
+              <option value="" disabled selected>Select a Product</option>
+              <option *ngFor="let product of productData" [value]="product.name">{{ product.name }}</option>
+            </select>
+            <div *ngIf="orderForm.get('name')?.invalid && orderForm.get('name')?.touched" class="text-danger small mt-1">
+              Select a product.
+            </div>
+          </div>
+
+          <!-- Quantity -->
+          <div class="col-md-4">
+            <label for="quantity" class="form-label fw-bold small">Quantity</label>
+            <input type="number" id="quantity" class="form-control form-control-sm border-primary shadow-sm" formControlName="quantity" placeholder="Enter quantity" />
+            <div *ngIf="orderForm.get('quantity')?.invalid && orderForm.get('quantity')?.touched" class="text-danger small mt-1">
+              At least 1.
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 3: Price, Discount, and Payable Amount -->
+        <div class="row g-3 mt-2">
+          <!-- Price -->
+          <div class="col-md-4">
+            <label for="price" class="form-label fw-bold small">Price</label>
+            <input type="number" id="price" class="form-control form-control-sm border-primary shadow-sm" formControlName="price" placeholder="Price" />
+          </div>
+
+          <!-- Discount -->
+          <div class="col-md-4">
+            <label for="discount" class="form-label fw-bold small">Discount (%)</label>
+            <input type="number" id="discount" class="form-control form-control-sm border-primary shadow-sm" formControlName="discount" placeholder="Discount" />
+            <div *ngIf="orderForm.get('discount')?.invalid && orderForm.get('discount')?.touched" class="text-danger small mt-1">
+              Between 0 and 100.
+            </div>
+          </div>
+
+          <!-- Payable Amount -->
+          <div class="col-md-4">
+            <label for="payableAmount" class="form-label fw-bold small">Payable Amount</label>
+            <input type="number" id="payableAmount" class="form-control form-control-sm border-primary shadow-sm" formControlName="payableAmount" readonly />
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-end mt-3">
+          <button type="button" class="btn btn-success me-2" [disabled]="orderForm.invalid" (click)="onSubmit()">Submit Order</button>
+          <button type="button" class="btn btn-danger" (click)="close()">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

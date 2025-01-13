@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card text-white text-center bg-secondary mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Total Products</h5>
+          <p class="card-text">{{ totalQuantity }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-white text-center bg-success mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Total Amount</h5>
+          <p class="card-text">INR: {{ totalPrice }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-white text-center bg-danger mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Low Stock</h5>
+          <p class="card-text">{{ lowStock }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <h4 class="text-info text-center">Low Stock Items</h4>
+      <canvas id="lowStockChart" width="150" height="150"></canvas>
+    </div>
+    <div class="col-md-4 offset-md-3"> <!-- Added offset to create space between charts -->
+      <h4 class="text-info text-center">Category Distribution</h4>
+      <canvas id="categoryChart" width="500" height="400"></canvas>
+    </div>
+  </div>
+
+  <div class="row mb-4 align-items-center">
+    <div class="col text-center">
+      <button class="btn btn-warning"  (click)="inventoryManagement()">Manage Inventory</button>
+    </div>
+  </div>
+</div>
